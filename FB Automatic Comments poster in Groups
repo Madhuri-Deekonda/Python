@@ -1,0 +1,59 @@
+import pyautogui
+import time
+from selenium import webdriver
+from time import sleep
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+UserName = input('Enter Username or Email Id:')
+Password = input('Enter Password:')
+
+driver = webdriver.Chrome(ChromeDriverManager().install())
+driver.get('https://www.facebook.com/')
+print ("Facebook Opened")
+sleep(1)
+
+username_box = driver.find_element_by_id('email')
+username_box.send_keys(UserName)
+print ("Email Id entered")
+sleep(1)
+
+password_box = driver.find_element_by_id('pass')
+password_box.send_keys(Password)
+print ("Password entered")
+
+login_box = driver.find_element_by_name('login')
+login_box.click()
+
+groups=['341187647143455','753892158796149','375382057160197']
+
+time.sleep(10)
+
+pyautogui.keyDown('ctrl')
+pyautogui.keyDown('t')
+pyautogui.keyUp('t')
+pyautogui.keyUp('ctrl')
+
+for i in range(len(groups)):
+    link = 'https://www.facebook.com/groups/'+groups[i]
+    pyautogui.typewrite(link)
+    pyautogui.typewrite('\n')
+
+    print('Waiting for 45 seconds\n')
+    time.sleep(45)
+
+    pyautogui.typewrite('p')
+    time.sleep(2)
+    print('Writting  post\n')
+    pyautogui.typewrite('Hello All, I have created the new group for my program testing purpose')
+    time.sleep(4)
+
+    pyautogui.keyDown('ctrl')
+    pyautogui.keyDown('enter')
+    pyautogui.keyUp('enter')
+    pyautogui.keyUp('ctrl')
+
+    time.sleep(3)
+
+    pyautogui.write(['f6'])
+    time.sleep(1)
